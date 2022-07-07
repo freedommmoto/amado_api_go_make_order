@@ -30,20 +30,20 @@ func (q *Queries) DeleteProduct(ctx context.Context, idProduct int32) (Product, 
 	return i, err
 }
 
-const listProduct = `-- name: ListProduct :many
+const listProducts = `-- name: ListProducts :many
 SELECT id_product, name, stock, price, active, created_at, modified, deleted
 FROM product
 ORDER BY id_product LIMIT $1
 OFFSET $2
 `
 
-type ListProductParams struct {
+type ListProductsParams struct {
 	Limit  int32 `json:"limit"`
 	Offset int32 `json:"offset"`
 }
 
-func (q *Queries) ListProduct(ctx context.Context, arg ListProductParams) ([]Product, error) {
-	rows, err := q.db.QueryContext(ctx, listProduct, arg.Limit, arg.Offset)
+func (q *Queries) ListProducts(ctx context.Context, arg ListProductsParams) ([]Product, error) {
+	rows, err := q.db.QueryContext(ctx, listProducts, arg.Limit, arg.Offset)
 	if err != nil {
 		return nil, err
 	}

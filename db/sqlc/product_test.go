@@ -12,6 +12,23 @@ func TestMakeProduct(t *testing.T) {
 	RandomMakeProduct(t)
 }
 
+func TestListProducts(t *testing.T) {
+
+	for i := 0; i <= 10; i++ {
+		RandomMakeProduct(t)
+	}
+
+	arg := ListProductsParams{
+		Limit:  10,
+		Offset: 0,
+	}
+	products, err := testQueries.ListProducts(context.Background(), arg)
+	assert.NoError(t, err)
+	for _, product := range products {
+		assert.NotEmpty(t, product.IDProduct)
+	}
+}
+
 func RandomMakeProduct(t *testing.T) Product {
 	name := sql.NullString{
 		String: "asd",

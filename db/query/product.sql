@@ -12,7 +12,7 @@ UPDATE product SET stock=$2 , modified=now() WHERE id_product = $1 RETURNING *;
 -- name: DeleteProduct :one
 UPDATE product SET deleted=now() WHERE id_product = $1 RETURNING *;
 
--- name: ListProduct :many
+-- name: ListProducts :many
 SELECT *
 FROM product
 ORDER BY id_product LIMIT $1

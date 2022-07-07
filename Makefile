@@ -15,3 +15,6 @@ dbup:
 
 dbdown:
 	migrate -path db/migration -database "postgresql://root:secret@localhost:5432/amado?sslmode=disable" -verbose down
+
+sqlc:
+	sqlc generate
